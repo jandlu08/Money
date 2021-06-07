@@ -1,31 +1,56 @@
-<div class="row justify-content-center">
+<mat-card>
+  <div class="row justify-content-center">
     <div class="col-md-4 text-center">
-      <form *ngIf="!success" #f="ngForm" (ngSubmit)="onSubmit()">
-        <img class="mb-4" src="assets/images/angular_solidBlack.svg" alt="" width="125" height="125">
-        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-        <div class="form-group">
-            <label for="name" class="sr-only">Name</label>
-            <input type="text" id="name" name="name" [(ngModel)]="userRegistration.name" class="form-control" placeholder="Your name" required autoFocus>
-        </div>
-        <div class="form-group">
-            <label for="email" class="sr-only">Email address</label>
-            <input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="userRegistration.email" class="form-control" placeholder="Email address" email required>
-            <small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">Please enter a valid email</small>
-        </div>
-        <div class="form-group">
-            <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="password" [(ngModel)]="userRegistration.password" class="form-control" placeholder="Password" aria-describedby="passwordHelp" required>     
-            <small id="passwordHelp" class="form-text text-muted">Min. 6 characters with at least one non alphanumeric character</small>
-          </div>   
-        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!f.form.valid">Go</button>
-        <ngx-spinner></ngx-spinner>   
+      <form [formGroup]="registerFormGroup" *ngIf="!success" #f="ngForm" (ngSubmit)="onSubmit()">
+        <mat-card-header>
+          <div mat-card-avatar></div>
+          <mat-card-title>Register</mat-card-title>
+        </mat-card-header>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input type="text" id="name" matInput name="name" formControlName="name" placeholder="Your name"
+            required >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input type="email" id="email" matInput name="email"  formControlName="email" 
+           placeholder="Email address" required>
+           <mat-error *ngIf="registerFormGroup.hasError('email', 'email') && !registerFormGroup.hasError('required', 'email')">
+             Please enter a valid email address
+           </mat-error>
+           <mat-error *ngIf="registerFormGroup.hasError('required', 'email')">
+             Email is <strong>required</strong>
+           </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input  matInput type="password" id="password" name="password" formControlName="password" 
+            placeholder="Password"  required> 
+            <mat-error *ngIf="registerFormGroup.hasError('minlength', 'password') && !registerFormGroup.hasError('required', 'password')">
+              Password should be at least 6 characters long
+            </mat-error>
+            <mat-error *ngIf="registerFormGroup.hasError('required', 'password')">
+              Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      <mat-form-field>
+        <mat-label>Confirm password</mat-label>
+        <input  matInput type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" 
+          placeholder="Password"  match="password" required>
+          <mat-error *ngIf="registerFormGroup.hasError('mismatch')">
+            Password doesn't match
+        </mat-error>
+      </mat-form-field>
+        <button mat-button color="primary" type="submit" [disabled]="!f.form.valid">Register</button>
+        <ngx-spinner></ngx-spinner>
         <div *ngIf="error" class="alert alert-danger mt-3" role="alert">
-            <strong>Oops!</strong> {{error}}
-        </div>     
-      </form>      
+          <strong>Oops!</strong> {{error}}
+        </div>
+      </form>
       <div *ngIf="success" class="alert alert-success" role="alert">
-          <h4 class="alert-heading">Well done!</h4>
-          <p>Your account was created successfully, <a routerLink="/login">Please login</a> to continue.</p>        
-      </div>  
-    </div> 
+        <h4 class="alert-heading">Well done!</h4>
+        <p>Your account was created successfully, <a routerLink="/login">Please login</a> to continue.</p>
+      </div>
+    </div>
   </div>
+</mat-card>

@@ -12,6 +12,8 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { CoreModule } from './core/core.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './angular-material.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     AccountModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule
   ],
   providers: [ConfigService,],
   bootstrap: [AppComponent]
