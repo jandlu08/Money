@@ -37,6 +37,66 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: debug",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "money:dev",
+                "target": "base",
+                "dockerfile": "${workspaceFolder}/backend/MoneyApi/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/backend/MoneyApi/MoneyApi.csproj"
+            }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: release",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "money:latest",
+                "dockerfile": "${workspaceFolder}/backend/MoneyApi/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/backend/MoneyApi/MoneyApi.csproj"
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build: debug"
+            ],
+            "dockerRun": {
+                "os": "Windows"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/backend/MoneyApi/MoneyApi.csproj",
+                "enableDebugging": true
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: release",
+            "dependsOn": [
+                "docker-build: release"
+            ],
+            "dockerRun": {
+                "os": "Windows"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/backend/MoneyApi/MoneyApi.csproj"
+            }
         }
     ]
 }

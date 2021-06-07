@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Boss\\projekty\\money\\backend\\MoneyApi\\MoneyApi.csproj": {}
+    "C:\\Users\\Boss\\projekty\\Money\\backend\\MoneyApi\\MoneyApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Boss\\projekty\\money\\backend\\MoneyApi\\MoneyApi.csproj": {
+    "C:\\Users\\Boss\\projekty\\Money\\backend\\MoneyApi\\MoneyApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Boss\\projekty\\money\\backend\\MoneyApi\\MoneyApi.csproj",
+        "projectUniqueName": "C:\\Users\\Boss\\projekty\\Money\\backend\\MoneyApi\\MoneyApi.csproj",
         "projectName": "MoneyApi",
-        "projectPath": "C:\\Users\\Boss\\projekty\\money\\backend\\MoneyApi\\MoneyApi.csproj",
+        "projectPath": "C:\\Users\\Boss\\projekty\\Money\\backend\\MoneyApi\\MoneyApi.csproj",
         "packagesPath": "C:\\Users\\Boss\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Boss\\projekty\\money\\backend\\MoneyApi\\obj\\",
+        "outputPath": "C:\\Users\\Boss\\projekty\\Money\\backend\\MoneyApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Boss\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,7 +38,31 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.6, )"
             },
