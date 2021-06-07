@@ -10,6 +10,15 @@ services:
       dockerfile: backend/MoneyApi/Dockerfile
     ports:
       - 5000:5000
+  
+  frontend:
+    image: frontend
+    build:
+      context: .
+      dockerfile: frontend/money/Dockerfile
+    ports:
+      - 80:80
+
   sql-server-db:
     container_name: sql-server-db
     image: "mcr.microsoft.com/mssql/server"
