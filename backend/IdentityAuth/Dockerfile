@@ -13,9 +13,6 @@ COPY . .
 WORKDIR "/src/backend/IdentityAuth"
 RUN dotnet build "IdentityAuth.csproj" -c Release -o /app/build
 
-RUN dotnet tool install --global dotnet-ef
-ENV PATH="${PATH}:/root/.dotnet/tools"
-RUN dotnet ef database update
 
 FROM build AS publish
 RUN dotnet publish "IdentityAuth.csproj" -c Release -o /app/publish

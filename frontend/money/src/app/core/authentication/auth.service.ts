@@ -30,7 +30,7 @@ export class AuthService extends BaseService  {
   }
 
   login(userLogin : any) {
-    return this.http.post(this.configService.authApiURI + '/register', userLogin).pipe(catchError(this.handleError));
+    return this.http.post(this.configService.authApiURI + '/login', userLogin).pipe(catchError(this.handleError));
   }
 
   async completeAuthentication() {
