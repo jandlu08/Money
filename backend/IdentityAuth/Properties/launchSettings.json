@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MoneyApi": {
+    "IdentityAuth": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

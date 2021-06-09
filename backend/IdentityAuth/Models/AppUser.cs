@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace MoneyApi.Identity.Models
+namespace IdentityAuth.Models
 {
     public class AppUser : IdentityUser
     {

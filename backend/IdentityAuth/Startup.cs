@@ -13,9 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using MoneyApi.Identity;
 
-namespace MoneyApi
+
+namespace IdentityAuth
 {
     public class Startup
     {
@@ -33,7 +33,7 @@ namespace MoneyApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MoneyApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IdentityAuth", Version = "v1" });
             });
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
@@ -49,7 +49,7 @@ namespace MoneyApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MoneyApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IdentityAuth v1"));
             }
 
             app.UseHttpsRedirection();

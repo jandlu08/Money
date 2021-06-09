@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MoneyApi.Migrations
+namespace IdentityAuth.Migrations
 {
     public partial class First : Migration
     {

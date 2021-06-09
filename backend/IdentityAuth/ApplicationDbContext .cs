@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MoneyApi.Identity
+namespace IdentityAuth
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
