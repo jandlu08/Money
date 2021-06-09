@@ -8,12 +8,12 @@
         </mat-card-header>
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input type="text" id="name" matInput name="name" formControlName="name" placeholder="Your name"
+          <input type="text" id="userName" matInput name="userName" formControlName="userName" placeholder="Your name"
             required >
         </mat-form-field>
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input type="email" id="email" matInput name="email"  formControlName="email" 
+          <input type="email" id="email" matInput name="email"  formControlName="email"
            placeholder="Email address" required>
            <mat-error *ngIf="registerFormGroup.hasError('email', 'email') && !registerFormGroup.hasError('required', 'email')">
              Please enter a valid email address
@@ -24,8 +24,8 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input  matInput type="password" id="password" name="password" formControlName="password" 
-            placeholder="Password"  required> 
+          <input  matInput type="password" id="password" name="password" formControlName="password"
+            placeholder="Password"  required>
             <mat-error *ngIf="registerFormGroup.hasError('minlength', 'password') && !registerFormGroup.hasError('required', 'password')">
               Password should be at least 6 characters long
             </mat-error>
@@ -35,7 +35,7 @@
         </mat-form-field>
       <mat-form-field>
         <mat-label>Confirm password</mat-label>
-        <input  matInput type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" 
+        <input  matInput type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword"
           placeholder="Password"  match="password" required>
           <mat-error *ngIf="registerFormGroup.hasError('mismatch')">
             Password doesn't match

@@ -1,8 +1,8 @@
 export class UserRegistration {
 
     constructor(
-        public name: string,
+        public userName: string,
         public email: string,
-        public password: string            
+        public password: string
       ) {  }
 }
