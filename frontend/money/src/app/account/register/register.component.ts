@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs/operators'
 import { AuthService } from '../../core/authentication/auth.service';
@@ -16,16 +17,10 @@ export class RegisterComponent implements OnInit {
   success: boolean | undefined;
   error: string | undefined;
   userRegistration: UserRegistration = { userName: '', email: '', password: '' };
-  submitted: boolean = false;
   registerFormGroup: FormGroup;
 
 
-
-
-
-
-
-  constructor(private authService: AuthService, private spinner: NgxSpinnerService, private formbuilder: FormBuilder) {
+  constructor(private authService: AuthService, private spinner: NgxSpinnerService, private formbuilder: FormBuilder, private router: Router) {
 
 
     this.registerFormGroup = this.formbuilder.group({
@@ -58,9 +53,9 @@ export class RegisterComponent implements OnInit {
     this.spinner.show();
 
     if (this) {
-      this.userRegistration.userName = this.registerFormGroup.get('userName')!.value
-      this.userRegistration.email = this.registerFormGroup.get('email')!.value
-      this.userRegistration.password = this.registerFormGroup.get('password')!.value
+      this.userRegistration.userName = this.registerFormGroup.get('userName')!.value;
+      this.userRegistration.email = this.registerFormGroup.get('email')!.value;
+      this.userRegistration.password = this.registerFormGroup.get('password')!.value;
 
       this.authService.register(this.userRegistration)
         .pipe(finalize(() => {
@@ -70,6 +65,7 @@ export class RegisterComponent implements OnInit {
           result => {
             if (result) {
               this.success = true;
+              this.router.navigate(['login'], {queryParams: { registered: 'true' } })
             }
           },
           error => {

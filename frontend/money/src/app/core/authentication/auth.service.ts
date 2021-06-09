@@ -29,8 +29,8 @@ export class AuthService extends BaseService  {
     });
   }
 
-  login() {
-    return this.manager.signinRedirect();
+  login(userLogin : any) {
+    return this.http.post(this.configService.authApiURI + '/register', userLogin).pipe(catchError(this.handleError));
   }
 
   async completeAuthentication() {
