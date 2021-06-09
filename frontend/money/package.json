@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "tsc --noEmit && eslint . --ext js,ts,json --quiet --fix"
   },
   "private": true,
   "dependencies": {
@@ -33,12 +34,19 @@
     "@angular/compiler-cli": "~12.0.3",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "jasmine-core": "~3.7.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "typescript": "~4.2.3"
+    "prettier": "^2.3.1",
+    "prettier-eslint": "^12.0.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.4"
   }
 }

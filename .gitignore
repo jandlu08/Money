@@ -1,5 +1,6 @@
-# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,angular
-# Edit at https://www.toptal.com/developers/gitignore?templates=aspnetcore,angular
+
+# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,angular,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=aspnetcore,angular,visualstudiocode
 
 ### Angular ###
 ## Angular ##
@@ -299,4 +300,17 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 
-# End of https://www.toptal.com/developers/gitignore/api/aspnetcore,angular
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# End of https://www.toptal.com/developers/gitignore/api/aspnetcore,angular,visualstudiocode
