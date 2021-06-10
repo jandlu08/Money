@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { UserLogin } from 'src/app/shared/models/user.login';
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   userLogin: UserLogin = { userName: '', password: '' };
   loginFormGroup: FormGroup;
 
-  constructor(private authService: AuthService, private spinner: NgxSpinnerService, private route: ActivatedRoute, private toastr: ToastrService, private formbuilder: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router, private spinner: NgxSpinnerService, private route: ActivatedRoute, private toastr: ToastrService, private formbuilder: FormBuilder) {
 
 
     this.loginFormGroup = this.formbuilder.group({
@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
           result => {
             if (result) {
               this.success = true;
+              this.router.navigateByUrl('/');
             }
           },
           error => {

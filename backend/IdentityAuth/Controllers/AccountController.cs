@@ -2,6 +2,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using IdentityAuth.Constants;
@@ -11,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Backend.Common.Extensions;
+using System.IO;
 
 namespace IdentityAuth.Controllers
 {
@@ -29,7 +32,7 @@ namespace IdentityAuth.Controllers
         {
             _userManager = userManager;
             _configuration = configuration;
-            _signInManager = signInManager; 
+            _signInManager = signInManager;
 
         }
 
@@ -98,30 +101,41 @@ namespace IdentityAuth.Controllers
 
             var utcNow = DateTime.UtcNow;
 
-            var claims = new Claim[]
+
+            using (RSA privateRsa = RSA.Create())
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, utcNow.ToString())
-            };
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration.GetValue<String>("Tokens:Key")));
+                privateRsa.FromXmlFile(Path.Combine(Directory.GetCurrentDirectory(),
+                        "Keys",
+                         this._configuration.GetValue<String>("Tokens:PrivateKey")
+                         ));
 
-            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-            var jwt = new JwtSecurityToken(
-                signingCredentials: signingCredentials,
-                claims: claims,
-                notBefore: utcNow,
-                expires: utcNow.AddSeconds(this._configuration.GetValue<int>("Tokens:Lifetime")),
-                audience: this._configuration.GetValue<String>("Tokens:Audience"),
-                issuer: this._configuration.GetValue<String>("Tokens:Issuer")
-            );
 
-            return new JwtSecurityTokenHandler().WriteToken(jwt);
+                var privateKey = new RsaSecurityKey(privateRsa);
+                SigningCredentials signingCredentials = new SigningCredentials(privateKey, SecurityAlgorithms.RsaSha256);
 
+                var claims = new Claim[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Iat, utcNow.ToString())
+                };
+
+
+                var jwt = new JwtSecurityToken(
+                    signingCredentials: signingCredentials,
+                    claims: claims,
+                    notBefore: utcNow,
+                    expires: utcNow.AddSeconds(this._configuration.GetValue<int>("Tokens:Lifetime")),
+                    audience: this._configuration.GetValue<String>("Tokens:Audience"),
+                    issuer: this._configuration.GetValue<String>("Tokens:Issuer")
+                );
+
+                return new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            }
         }
-
 
     }
 
